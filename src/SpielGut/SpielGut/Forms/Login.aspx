@@ -11,7 +11,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
     <link rel="stylesheet" href="/Content/login.css" />
     <link rel="stylesheet" href="/Content/main.css" />
-    <link rel="icon" type="image/ico" href="~/img/favicon.ico" />
+    <link rel="icon" type="image/ico" href="/img/favicon.ico" />
     <title>Login - SpielGut</title>
 </head>
 <body>
@@ -50,8 +50,7 @@
                         </div>
                         <div class="row">
                             <div class="col s12 m8">
-                                <a type="button" href="Registrieren.aspx" id="registrierenbtn" class="btn waves-effect waves-light">
-                                    Registrieren
+                                <a type="button" href="Registrieren.aspx" id="registrierenbtn" class="btn waves-effect waves-light">Registrieren
                                 </a>
                             </div>
                             <div class="col s12 m4">

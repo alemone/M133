@@ -3,12 +3,9 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css" />
-    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link type="text/css" rel="stylesheet" href="/Content/materialize.min.css" media="screen,projection" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/Content/registrieren.css" />
     <link rel="stylesheet" href="/Content/main.css" />
     <link rel="icon" type="image/ico" href="/img/favicon.ico" />
@@ -33,21 +30,21 @@
     <main>
         <div id="content" class="container">
             <div class="row">
-                <form class="col s12">
+                <form class="col s12" runat="server">
                     <div class="section">
                         <div class="row">
-                            <div class="input-field col s6">
-                                <input id="vorname" type="text" class="validate" />
+                            <div class="input-field col l4 offset-l2">
+                                <input runat="server" id="vorname" type="text" class="validate" />
                                 <label for="vorname">Vorname</label>
                             </div>
-                            <div class="input-field col s6">
-                                <input id="nachname" type="text" class="validate" />
+                            <div class="input-field col s4">
+                                <input runat="server" id="nachname" type="text" class="validate" />
                                 <label for="nachname">Nachname</label>
                             </div>
                         </div>
                         <div class="row">
                             <div class="input-field col s12">
-                                <input id="email" type="email" class="validate" />
+                                <input runat="server" id="email" type="email" class="validate" />
                                 <label for="email">Email</label>
                             </div>
                         </div>
@@ -56,13 +53,13 @@
                     <div class="section">
                         <div class="row">
                             <div class="input-field col s12">
-                                <input id="passwort" type="password" class="validate" />
+                                <input runat="server" id="passwort" type="password" class="validate" />
                                 <label for="passwort">Passwort</label>
                             </div>
                         </div>
                         <div class="row">
                             <div class="input-field col s12">
-                                <input id="passwortwiderholen" type="password" class="validate" />
+                                <input runat="server" id="passwortwiderholen" type="password" class="validate" />
                                 <label for="passwortwiderholen">Passwort</label>
                             </div>
                         </div>
@@ -71,28 +68,39 @@
                     <div class="section">
                         <div class="row">
                             <div class="input-field col s6">
-                                <input id="land" type="text" class="validate" />
-                                <label for="land">Land</label>
+                                <input runat="server" id="postleitzahl" type="text" class="validate" />
+                                <label for="postleitzahl">Postleitzahl</label>
                             </div>
                             <div class="input-field col s6">
-                                <input id="ort" type="text" class="validate" />
+                                <input runat="server" id="ort" type="text" class="validate" />
                                 <label for="ort">Ort</label>
                             </div>
                         </div>
                         <div class="row">
                             <div class="input-field col s6">
-                                <input id="strasse" type="text" class="validate" />
+                                <input runat="server" id="strasse" type="text" class="validate" />
                                 <label for="strasse">Strasse</label>
                             </div>
                             <div class="input-field col s6">
-                                <input id="hausnummer" type="text" class="validate" />
+                                <input runat="server" id="hausnummer" type="text" class="validate" />
                                 <label for="hausnummer">Hausnummer</label>
                             </div>
                         </div>
                         <div class="row">
                             <div class="input-field col s12 m8 l6 offset-l3 offset-m2">
-                                <input id="telefonnummer" type="text" class="validate" />
+                                <input runat="server" id="telefonnummer" type="text" class="validate" />
                                 <label for="telefonnummer">Telefonnummer</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s12 m8">
+                                <a type="button" href="Login.aspx" id="zurueckbtn" class="btn waves-effect waves-light">Zurück
+                                </a>
+                            </div>
+                            <div class="col s12 m4">
+                                <button runat="server" type="submit" id="registrierenbtn" class="btn waves-effect waves-light">
+                                    Registrieren
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -120,6 +128,8 @@
            </a>
             </div>
         </div>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript" src="/scripts/materialize.min.js"></script>
     </footer>
 </body>
 </html>

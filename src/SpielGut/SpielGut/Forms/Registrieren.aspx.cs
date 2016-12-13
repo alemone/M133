@@ -1,4 +1,9 @@
 ﻿using System;
+using System.IO;
+using Helpers.Serializers;
+using SpielGut.Klassen;
+using SpielGut.Validierer;
+
 namespace WebAppWebpage
 {
     public partial class Registrieren : System.Web.UI.Page
@@ -7,11 +12,7 @@ namespace WebAppWebpage
         {
             if (IsPostBack)
             {
-                Session.Add("Benutzer", "Joan Künzler");
-
-                Response.Cookies["SpielGut"]["Benutzer"] = "Joan Künzler";
-                Response.Cookies["SpielGut"].Expires = DateTime.Now.AddDays(10.0);
-                Response.Redirect("MeinProfil.aspx");
+                this.HandlePostRequests();
             }
             else if (IsLoggedIn())
             {
@@ -19,9 +20,35 @@ namespace WebAppWebpage
             }
         }
 
+        private void HandlePostRequests()
+        {
+            var adresse = new Address(
+                   this.postleitzahl.Value,
+                   this.strasse.Value,
+                   this.hausnummer.Value,
+                   this.ort.Value
+                  );
+
+            var benutzer = new Benutzer(
+                this.vorname.Value,
+                this.nachname.Value,
+                this.email.Value,
+                this.passwort.Value,
+                this.passwortwiderholen.Value,
+                adresse,
+                this.telefonnummer.Value
+                );
+
+            if (new UserValidator().IsValid(benutzer))
+            {
+                var jsonSerializer = new JsonSerializer(Path.GetTempPath() + "\\SpielGutSicherungen");
+                jsonSerializer.SaveObjectToFile(benutzer);
+            }
+        }
+
         private bool IsLoggedIn()
         {
-            return !(Session["Benutzer"] == null && Response.Cookies["SpielGut"]["Benutzer"] == null);
+            return !(this.Session["Benutzer"] == null && this.Response.Cookies["SpielGut"]["Benutzer"] == null);
         }
     }
 }

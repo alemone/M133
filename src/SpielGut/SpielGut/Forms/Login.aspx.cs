@@ -23,5 +23,10 @@ namespace WebAppWebpage
         {
             return !(Session["Benutzer"] == null && Response.Cookies["SpielGut"]["Benutzer"] == null);             
         }
+
+        protected void OnClick(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
