@@ -3,6 +3,7 @@ using System.IO;
 using Helpers.Serializers;
 using SpielGut.Klassen;
 using SpielGut.Validierer;
+using Helpers.Password;
 
 namespace WebAppWebpage
 {
@@ -40,6 +41,8 @@ namespace WebAppWebpage
 
             if (new UserValidator().IsValid(benutzer))
             {
+                benutzer.Passwort = PasswordHelper.HashPassword(benutzer.Passwort);
+                benutzer.PasswortWiderholen = "";
                 var jsonSerializer = new JsonSerializer(Path.GetTempPath() + "\\SpielGutSicherungen");
                 jsonSerializer.SaveObjectToFile(benutzer);
             }

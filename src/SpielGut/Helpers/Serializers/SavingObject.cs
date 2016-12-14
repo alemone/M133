@@ -6,7 +6,7 @@ namespace Helpers.Serializers
     public class SavingObject<T>
         where T : DataObject
     {
-        public List<T> ObjectsToSave { get; }
+        public List<T> ObjectsToSave { get; set; }
         public SavingObject()
         {
             this.ObjectsToSave = new List<T>();

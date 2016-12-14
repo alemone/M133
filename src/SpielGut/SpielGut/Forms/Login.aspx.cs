@@ -1,5 +1,8 @@
 ﻿using System;
+using System.IO;
 using SpielGut.Klassen;
+using Helpers.Serializers;
+using Helpers.Password;
 
 namespace WebAppWebpage
 {
@@ -9,25 +12,17 @@ namespace WebAppWebpage
         {
             if (IsPostBack)
             {
-                var address = new Address(
-                    "9300",
-                    "Wittenbach",
-                    "Neusteig 14");
-                var benutzer = new Benutzer(
-                    "Joan",
-                    "Künzler",
-                    "joan.kuenzler@gmail.com",
-                    "0123456789abcdef",
-                    "0123456789abcdef",
-                    address,
-                    "071 290 12 14"
-                    );
+                var jsonSerializer = new JsonSerializer(Path.GetTempPath() + "\\SpielGutSicherungen");
+                var objList = jsonSerializer.LoadAllObjectsFromFile<Benutzer>();
+                var benutzer = objList.Find(o => o.Email == email.Value);
+                if (benutzer != null && PasswordHelper.CompareStringWithHash(passwort.Value, benutzer.Passwort))
+                {
+                    Session.Add("Benutzer", benutzer);
 
-                Session.Add("Benutzer", benutzer);
-
-                Response.Cookies["SpielGut"]["Benutzer"] = benutzer.ToString();
-                Response.Cookies["SpielGut"].Expires = DateTime.Now.AddDays(10.0);
-                Response.Redirect("MeinProfil.aspx");
+                    Response.Cookies["SpielGut"]["Benutzer"] = benutzer.ToString();
+                    Response.Cookies["SpielGut"].Expires = DateTime.Now.AddDays(10.0);
+                    Response.Redirect("MeinProfil.aspx");
+                }
             }
             else if (IsLoggedIn())
             {
@@ -37,7 +32,7 @@ namespace WebAppWebpage
 
         private bool IsLoggedIn()
         {
-            return !(Session["Benutzer"] == null && Response.Cookies["SpielGut"]["Benutzer"] == null);             
+            return !(Session["Benutzer"] == null && Response.Cookies["SpielGut"]["Benutzer"] == null);
         }
 
         protected void OnClick(object sender, EventArgs e)
