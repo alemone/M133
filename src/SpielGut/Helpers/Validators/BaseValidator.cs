@@ -1,9 +1,8 @@
 ﻿using System.Linq;
 using System.Text.RegularExpressions;
-using Helpers.BaseTypes;
+using KDG.DataObjectHandler.BaseTypes;
 
-
-namespace Helpers.Validators
+namespace KDG.DataObjectHandler.Validators
 {
     public abstract class BaseValidator<T>
         where T : DataObject

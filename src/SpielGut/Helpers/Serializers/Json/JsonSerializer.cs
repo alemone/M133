@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using Helpers.BaseTypes;
 using JsonNet.PrivateSettersContractResolvers;
+using KDG.DataObjectHandler.BaseTypes;
 using Newtonsoft.Json;
 
-namespace Helpers.Serializers.Json
+namespace KDG.DataObjectHandler.Serializers.Json
 {
     public class JsonSerializer : ISerializer
     {

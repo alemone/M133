@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Helpers.BaseTypes
+namespace KDG.DataObjectHandler.BaseTypes
 {
     public abstract class DataObject
     {

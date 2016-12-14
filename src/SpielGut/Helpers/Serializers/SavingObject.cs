@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Helpers.BaseTypes;
+using KDG.DataObjectHandler.BaseTypes;
 
-namespace Helpers.Serializers
+namespace KDG.DataObjectHandler.Serializers
 {
     public class SavingObject<T>
         where T : DataObject
