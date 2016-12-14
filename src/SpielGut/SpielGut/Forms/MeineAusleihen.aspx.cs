@@ -36,7 +36,7 @@ namespace WebAppWebpage
         {
             return !(Session["Benutzer"] == null && Response.Cookies["SpielGut"]["Benutzer"] == null);
         }
-        protected void Unnamed_Click(object sender, EventArgs e)
+        protected void AusleiheZurueckgeben(object sender, EventArgs e)
         {
             throw new NotImplementedException();
         }
