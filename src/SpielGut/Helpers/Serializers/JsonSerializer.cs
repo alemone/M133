@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 using Helpers.BaseTypes;
 using Microsoft.SqlServer.Server;
+using Newtonsoft.Json;
 
 namespace Helpers.Serializers
 {
@@ -15,6 +16,8 @@ namespace Helpers.Serializers
     {
 
         private readonly string root;
+
+        private readonly Newtonsoft.Json.JsonSerializer serializer;
 
         private string Root
         {
@@ -31,6 +34,7 @@ namespace Helpers.Serializers
         public JsonSerializer(string rootPath)
         {
             this.root = rootPath;
+            this.serializer = new Newtonsoft.Json.JsonSerializer();
         }
 
         private string GetFileName(Type type)
@@ -40,47 +44,34 @@ namespace Helpers.Serializers
 
         private string GetPath(Type type)
         {
-            var path = this.Root + "\\" + this.GetFileName(type);
-            if (!File.Exists(path))
-            {
-                this.WriteFile(string.Empty, path);
-            }
-            return path;
+            return this.Root + "\\" + this.GetFileName(type);
         }
 
-        private void WriteFile(string content, string path)
+        private FileStream GetFileStream(Type type)
         {
-            using (var writer = new StreamWriter(path))
-            {
-                writer.Write(content);
-            }
-        }
-
-        private string ReadFile(string path)
-        {
-            string jsonObject;
-            using (var reader = new StreamReader(path))
-            {
-                jsonObject = reader.ReadToEnd();
-            }
-            return jsonObject;
+            return new FileStream(this.GetPath(type), FileMode.OpenOrCreate);
         }
 
         private SavingObject<T> ReadSavingObjectFromFile<T>()
             where T : DataObject
         {
-            var path = this.GetPath(typeof(T));
-            var jsonObject = this.ReadFile(path);
-            var savingObject = new JavaScriptSerializer().Deserialize<SavingObject<T>>(jsonObject);
+            SavingObject<T> savingObject;
+            using (var stream = this.GetFileStream(typeof(T)))
+            using (var reader = new JsonTextReader(new StreamReader(stream)))
+            {
+                savingObject = this.serializer.Deserialize<SavingObject<T>>(reader);
+            }
             return savingObject ?? new SavingObject<T>();
         }
 
         private void WriteSavingObjectToFile<T>(SavingObject<T> savingObject)
             where T : DataObject
         {
-            var path = this.GetPath(typeof(T));
-            var jsonObject = new JavaScriptSerializer().Serialize(savingObject);
-            this.WriteFile(jsonObject, path);
+            using (var stream = this.GetFileStream(typeof(T)))
+            using (var writer = new JsonTextWriter(new StreamWriter(stream)))
+            {
+                this.serializer.Serialize(writer, savingObject);
+            }
         }
 
         public void SaveObjectToFile<T>(T objectToSerialize)
