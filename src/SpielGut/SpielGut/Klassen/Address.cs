@@ -10,14 +10,12 @@ namespace SpielGut.Klassen
         public string Postleitzahl { get; set; }
         public string Ort { get; set; }
         public string Strasse { get; set; }
-        public string Hausnummer { get; set; }
 
-        public Address(string postleitzahl, string ort, string strasse, string hausnummer)
+        public Address(string postleitzahl, string ort, string strasse)
         {
             this.Postleitzahl = postleitzahl;
             this.Ort = ort;
             this.Strasse = strasse;
-            this.Hausnummer = hausnummer;
         }
 
         public Address()

@@ -25,7 +25,6 @@ namespace WebAppWebpage
             var adresse = new Address(
                    this.postleitzahl.Value,
                    this.strasse.Value,
-                   this.hausnummer.Value,
                    this.ort.Value
                   );
 

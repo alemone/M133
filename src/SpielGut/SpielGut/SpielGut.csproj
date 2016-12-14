@@ -96,6 +96,8 @@
   <ItemGroup>
     <Content Include="Content\materialize.css" />
     <Content Include="Content\materialize.min.css" />
+    <Content Include="Content\meineausleihen.css" />
+    <Content Include="Forms\MeineAusleihen.aspx" />
     <Content Include="img\SpielgutBanner.jpg" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
@@ -147,6 +149,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\MeineAusleihen.aspx.cs">
+      <DependentUpon>MeineAusleihen.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forms\MeineAusleihen.aspx.designer.cs">
+      <DependentUpon>MeineAusleihen.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Registrieren.aspx.cs">
       <DependentUpon>Registrieren.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

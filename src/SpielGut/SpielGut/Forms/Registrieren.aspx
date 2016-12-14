@@ -33,18 +33,18 @@
                 <form class="col s12" runat="server">
                     <div class="section">
                         <div class="row">
-                            <div class="input-field col l4 offset-l2">
-                                <input runat="server" id="vorname" type="text" class="validate" />
+                            <div class="input-field col s12 m6 l4 offset-l2">
+                                <input runat="server" id="vorname" type="text" class="validate" length="40" />
                                 <label for="vorname">Vorname</label>
                             </div>
-                            <div class="input-field col s4">
-                                <input runat="server" id="nachname" type="text" class="validate" />
+                            <div class="input-field col s12 m6 l4">
+                                <input runat="server" id="nachname" type="text" class="validate" length="40" />
                                 <label for="nachname">Nachname</label>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="input-field col s12">
-                                <input runat="server" id="email" type="email" class="validate" />
+                            <div class="input-field col s12 m8 l6 offset-m2 offset-l3">
+                                <input runat="server" id="email" type="email" class="validate" length="100" />
                                 <label for="email">Email</label>
                             </div>
                         </div>
@@ -52,52 +52,48 @@
                     <div class="divider"></div>
                     <div class="section">
                         <div class="row">
-                            <div class="input-field col s12">
-                                <input runat="server" id="passwort" type="password" class="validate" />
+                            <div class="input-field col s12 m8 l6 offset-m2 offset-l3">
+                                <input runat="server" id="passwort" type="password" class="validate" length="64" />
                                 <label for="passwort">Passwort</label>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="input-field col s12">
-                                <input runat="server" id="passwortwiderholen" type="password" class="validate" />
-                                <label for="passwortwiderholen">Passwort</label>
+                            <div class="input-field col s12 m8 l6 offset-m2 offset-l3">
+                                <input runat="server" id="passwortwiderholen" type="password" class="validate" length="64" />
+                                <label for="passwortwiderholen">Passwort wiederholen</label>
                             </div>
                         </div>
                     </div>
                     <div class="divider"></div>
                     <div class="section">
                         <div class="row">
-                            <div class="input-field col s6">
-                                <input runat="server" id="postleitzahl" type="text" class="validate" />
+                            <div class="input-field col s12 m6 l4 offset-l2">
+                                <input runat="server" id="postleitzahl" type="text" class="validate" length="40" />
                                 <label for="postleitzahl">Postleitzahl</label>
                             </div>
-                            <div class="input-field col s6">
-                                <input runat="server" id="ort" type="text" class="validate" />
+                            <div class="input-field col s12 m6 l4">
+                                <input runat="server" id="ort" type="text" class="validate" length="40" />
                                 <label for="ort">Ort</label>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="input-field col s6">
-                                <input runat="server" id="strasse" type="text" class="validate" />
+                            <div class="input-field col s12 m8 l6 offset-m2 offset-l3">
+                                <input runat="server" id="strasse" type="text" class="validate" length="40" />
                                 <label for="strasse">Strasse</label>
-                            </div>
-                            <div class="input-field col s6">
-                                <input runat="server" id="hausnummer" type="text" class="validate" />
-                                <label for="hausnummer">Hausnummer</label>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="input-field col s12 m8 l6 offset-l3 offset-m2">
-                                <input runat="server" id="telefonnummer" type="text" class="validate" />
+                            <div class="input-field col s12 m8 l6 offset-m2 offset-l3">
+                                <input runat="server" id="telefonnummer" type="text" class="validate" length="40" />
                                 <label for="telefonnummer">Telefonnummer</label>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col s12 m8">
+                            <div class="col s12 m10">
                                 <a type="button" href="Login.aspx" id="zurueckbtn" class="btn waves-effect waves-light">Zurück
                                 </a>
                             </div>
-                            <div class="col s12 m4">
+                            <div class="col s12 m2">
                                 <button runat="server" type="submit" id="registrierenbtn" class="btn waves-effect waves-light">
                                     Registrieren
                                 </button>
