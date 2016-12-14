@@ -21,12 +21,12 @@ namespace WebAppWebpage
 
                     Response.Cookies["SpielGut"]["Benutzer"] = benutzer.ToString();
                     Response.Cookies["SpielGut"].Expires = DateTime.Now.AddDays(10.0);
-                    Response.Redirect("MeinProfil.aspx");
+                    Response.Redirect("MeineAusleihen.aspx");
                 }
             }
             else if (IsLoggedIn())
             {
-                Response.Redirect("MeinProfil.aspx");
+                Response.Redirect("MeineAusleihen.aspx");
             }
         }
 

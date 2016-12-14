@@ -11,5 +11,14 @@ namespace WebAppWebpage {
     
     
     public partial class MeineAusleihen {
+        
+        /// <summary>
+        /// <%= ausleihe.Id %>-Steuerelement
+        /// </summary>
+        /// <remarks>
+        /// Automatisch generiertes Feld
+        /// Zum Ändern Felddeklaration aus der Designerdatei in eine Code-Behind-Datei verschieben.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button <%= ausleihe.Id %>;
     }
 }

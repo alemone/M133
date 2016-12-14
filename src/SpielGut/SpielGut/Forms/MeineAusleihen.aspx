@@ -59,7 +59,7 @@
                                     <td><%= ausleihe.EndDatum %></td>
                                     <td><%= ausleihe.Kosten %></td>
                                     <td>
-                                        <asp:Button runat="server" class="btn" OnClick="AusleiheZurueckgeben" Text="X" /></td>
+                                        <asp:Button runat="server" class="btn" id="<%= ausleihe.Id %>" OnClick="AusleiheZurueckgeben" Text="X" /></td>
                                 </tr>
                                 <%}
                                     } %>
