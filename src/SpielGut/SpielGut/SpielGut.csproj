@@ -202,9 +202,9 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\Helpers\Helpers.csproj">
+    <ProjectReference Include="..\Helpers\DataObjectHandler.csproj">
       <Project>{6d5b241b-2e44-4932-bb6c-76209c8f5f19}</Project>
-      <Name>Helpers</Name>
+      <Name>DataObjectHandler</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

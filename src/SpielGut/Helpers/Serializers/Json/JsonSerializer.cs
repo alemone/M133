@@ -1,20 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.Design.Serialization;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web.Script.Serialization;
-using Helpers.BaseTypes;
-using Microsoft.SqlServer.Server;
+using JsonNet.PrivateSettersContractResolvers;
+using KDG.DataObjectHandler.BaseTypes;
+using Newtonsoft.Json;
 
-namespace Helpers.Serializers
+namespace KDG.DataObjectHandler.Serializers.Json
 {
-    public class JsonSerializer
+    public class JsonSerializer : ISerializer
     {
 
         private readonly string root;
+
+        private readonly Newtonsoft.Json.JsonSerializer serializer;
 
         private string Root
         {
@@ -31,6 +29,7 @@ namespace Helpers.Serializers
         public JsonSerializer(string rootPath)
         {
             this.root = rootPath;
+            this.serializer = new Newtonsoft.Json.JsonSerializer();
         }
 
         private string GetFileName(Type type)
@@ -40,50 +39,40 @@ namespace Helpers.Serializers
 
         private string GetPath(Type type)
         {
-            var path = this.Root + "\\" + this.GetFileName(type);
-            if (!File.Exists(path))
-            {
-                this.WriteFile(string.Empty, path);
-            }
-            return path;
+            return this.Root + "\\" + this.GetFileName(type);
         }
 
-        private void WriteFile(string content, string path)
+        private FileStream GetFileStream(Type type)
         {
-            using (var writer = new StreamWriter(path))
-            {
-                writer.Write(content);
-            }
+            return new FileStream(this.GetPath(type), FileMode.OpenOrCreate);
         }
 
-        private string ReadFile(string path)
-        {
-            string jsonObject;
-            using (var reader = new StreamReader(path))
-            {
-                jsonObject = reader.ReadToEnd();
-            }
-            return jsonObject;
-        }
 
         private SavingObject<T> ReadSavingObjectFromFile<T>()
             where T : DataObject
         {
-            var path = this.GetPath(typeof(T));
-            var jsonObject = this.ReadFile(path);
-            var savingObject = new JavaScriptSerializer().Deserialize<SavingObject<T>>(jsonObject);
+            SavingObject<T> savingObject;
+            using (var reader = new StreamReader(this.GetFileStream(typeof(T))))
+            {
+                var json = reader.ReadToEnd();
+                var settings = new JsonSerializerSettings {ContractResolver = new PrivateSetterContractResolver()};
+                savingObject = JsonConvert.DeserializeObject<SavingObject<T>>(json, settings);
+            }
             return savingObject ?? new SavingObject<T>();
         }
 
         private void WriteSavingObjectToFile<T>(SavingObject<T> savingObject)
             where T : DataObject
         {
-            var path = this.GetPath(typeof(T));
-            var jsonObject = new JavaScriptSerializer().Serialize(savingObject);
-            this.WriteFile(jsonObject, path);
+            using (var writer = new StreamWriter(this.GetFileStream(typeof(T))))
+            {
+                var settings = new JsonSerializerSettings { ContractResolver = new PrivateSetterContractResolver() };
+                var json = JsonConvert.SerializeObject(savingObject, settings);
+                writer.Write(json);
+            }
         }
 
-        public void SaveObjectToFile<T>(T objectToSerialize)
+        public void SaveObject<T>(T objectToSerialize)
           where T : DataObject
         {
             var savingObject = this.ReadSavingObjectFromFile<T>();
@@ -91,13 +80,13 @@ namespace Helpers.Serializers
             savingObject.ObjectsToSave.Add(objectToSerialize);
             this.WriteSavingObjectToFile(savingObject);
         }
-        public T LoadObjectFromFile<T>(Guid id)
+        public T LoadObject<T>(Guid id)
             where T : DataObject
         {
             var savingObject = this.ReadSavingObjectFromFile<T>();
             return savingObject.ObjectsToSave.Find(o => o.Id == id);
         }
-        public List<T> LoadAllObjectsFromFile<T>()
+        public List<T> LoadAllObjects<T>()
             where T : DataObject
         {
             var savingObject = this.ReadSavingObjectFromFile<T>();

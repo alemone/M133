@@ -1,9 +1,9 @@
 ﻿using System;
 using System.IO;
-using Helpers.Serializers;
+using KDG.DataObjectHandler.Password;
+using KDG.DataObjectHandler.Serializers.Json;
 using SpielGut.Klassen;
 using SpielGut.Validierer;
-using Helpers.Password;
 
 namespace WebAppWebpage
 {
@@ -44,7 +44,7 @@ namespace WebAppWebpage
                 benutzer.Passwort = PasswordHelper.HashPassword(benutzer.Passwort);
                 benutzer.PasswortWiderholen = "";
                 var jsonSerializer = new JsonSerializer(Path.GetTempPath() + "\\SpielGutSicherungen");
-                jsonSerializer.SaveObjectToFile(benutzer);
+                jsonSerializer.SaveObject(benutzer);
             }
         }
 

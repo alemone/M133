@@ -1,8 +1,8 @@
 ﻿using System;
 using System.IO;
+using KDG.DataObjectHandler.Password;
+using KDG.DataObjectHandler.Serializers.Json;
 using SpielGut.Klassen;
-using Helpers.Serializers;
-using Helpers.Password;
 
 namespace WebAppWebpage
 {
@@ -13,7 +13,7 @@ namespace WebAppWebpage
             if (IsPostBack)
             {
                 var jsonSerializer = new JsonSerializer(Path.GetTempPath() + "\\SpielGutSicherungen");
-                var benutzerList = jsonSerializer.LoadAllObjectsFromFile<Benutzer>();
+                var benutzerList = jsonSerializer.LoadAllObjects<Benutzer>();
                 var benutzer = benutzerList.Find(o => o.Email == email.Value);
                 if (benutzer != null && PasswordHelper.CompareStringWithHash(passwort.Value, benutzer.Passwort))
                 {

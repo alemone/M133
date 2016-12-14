@@ -1,5 +1,5 @@
-﻿using SpielGut.Klassen;
-using Helpers.Validators;
+﻿using KDG.DataObjectHandler.Validators;
+using SpielGut.Klassen;
 
 namespace SpielGut.Validierer
 {

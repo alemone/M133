@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpielGut", "SpielGut\SpielGut.csproj", "{0461C024-177B-4AA3-887E-F4E9365A8ED8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helpers", "Helpers\Helpers.csproj", "{6D5B241B-2E44-4932-BB6C-76209C8F5F19}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataObjectHandler", "Helpers\DataObjectHandler.csproj", "{6D5B241B-2E44-4932-BB6C-76209C8F5F19}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

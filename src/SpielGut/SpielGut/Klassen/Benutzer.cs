@@ -1,5 +1,5 @@
 ﻿using System;
-using Helpers.BaseTypes;
+using KDG.DataObjectHandler.BaseTypes;
 
 namespace SpielGut.Klassen
 {
