@@ -13,7 +13,7 @@ namespace WebAppWebpage
             if (IsPostBack)
             {
                 var jsonSerializer = new JsonSerializer(Path.GetTempPath() + "\\SpielGutSicherungen");
-                var benutzerList = jsonSerializer.LoadAllObjectsFromFile<Benutzer>();
+                var benutzerList = jsonSerializer.LoadAllObjects<Benutzer>();
                 var benutzer = benutzerList.Find(o => o.Email == email.Value);
                 if (benutzer != null && PasswordHelper.CompareStringWithHash(passwort.Value, benutzer.Passwort))
                 {

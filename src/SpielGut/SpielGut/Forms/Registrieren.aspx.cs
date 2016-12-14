@@ -44,7 +44,7 @@ namespace WebAppWebpage
                 benutzer.Passwort = PasswordHelper.HashPassword(benutzer.Passwort);
                 benutzer.PasswortWiderholen = "";
                 var jsonSerializer = new JsonSerializer(Path.GetTempPath() + "\\SpielGutSicherungen");
-                jsonSerializer.SaveObjectToFile(benutzer);
+                jsonSerializer.SaveObject(benutzer);
             }
         }
 

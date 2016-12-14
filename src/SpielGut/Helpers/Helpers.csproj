@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseTypes\DataObject.cs" />
+    <Compile Include="Serializers\ISerializer.cs" />
     <Compile Include="Serializers\Json\PrivateSettersContractResolvers.cs" />
     <Compile Include="Password\PasswordHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

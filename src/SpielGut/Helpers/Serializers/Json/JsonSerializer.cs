@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 
 namespace Helpers.Serializers.Json
 {
-    public class JsonSerializer
+    public class JsonSerializer : ISerializer
     {
 
         private readonly string root;
@@ -72,7 +72,7 @@ namespace Helpers.Serializers.Json
             }
         }
 
-        public void SaveObjectToFile<T>(T objectToSerialize)
+        public void SaveObject<T>(T objectToSerialize)
           where T : DataObject
         {
             var savingObject = this.ReadSavingObjectFromFile<T>();
@@ -80,13 +80,13 @@ namespace Helpers.Serializers.Json
             savingObject.ObjectsToSave.Add(objectToSerialize);
             this.WriteSavingObjectToFile(savingObject);
         }
-        public T LoadObjectFromFile<T>(Guid id)
+        public T LoadObject<T>(Guid id)
             where T : DataObject
         {
             var savingObject = this.ReadSavingObjectFromFile<T>();
             return savingObject.ObjectsToSave.Find(o => o.Id == id);
         }
-        public List<T> LoadAllObjectsFromFile<T>()
+        public List<T> LoadAllObjects<T>()
             where T : DataObject
         {
             var savingObject = this.ReadSavingObjectFromFile<T>();
