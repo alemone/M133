@@ -6,7 +6,9 @@ namespace Helpers.BaseTypes
     {
         public Guid Id { get; private set; }
 
-        public bool IsActive { get; set; } = true;
+        public DateTime? ValidTo { get; private set; }
+
+        public bool IsValid => this.ValidTo > DateTime.Now;
 
         protected DataObject(Guid id)
         {
@@ -16,6 +18,11 @@ namespace Helpers.BaseTypes
         protected DataObject()
         {
             
+        }
+
+        public void Terminate()
+        {
+            this.ValidTo = DateTime.Now;
         }
     }
 }
