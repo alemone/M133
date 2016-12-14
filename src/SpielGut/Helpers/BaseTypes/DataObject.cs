@@ -4,7 +4,7 @@ namespace Helpers.BaseTypes
 {
     public abstract class DataObject
     {
-        public Guid Id { get; set; }
+        public Guid Id { get; private set; }
 
         public bool IsActive { get; set; } = true;
 

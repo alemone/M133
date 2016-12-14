@@ -1,16 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.Design.Serialization;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web.Script.Serialization;
 using Helpers.BaseTypes;
-using Microsoft.SqlServer.Server;
+using JsonNet.PrivateSettersContractResolvers;
 using Newtonsoft.Json;
 
-namespace Helpers.Serializers
+namespace Helpers.Serializers.Json
 {
     public class JsonSerializer
     {
@@ -52,14 +47,16 @@ namespace Helpers.Serializers
             return new FileStream(this.GetPath(type), FileMode.OpenOrCreate);
         }
 
+
         private SavingObject<T> ReadSavingObjectFromFile<T>()
             where T : DataObject
         {
             SavingObject<T> savingObject;
-            using (var stream = this.GetFileStream(typeof(T)))
-            using (var reader = new JsonTextReader(new StreamReader(stream)))
+            using (var reader = new StreamReader(this.GetFileStream(typeof(T))))
             {
-                savingObject = this.serializer.Deserialize<SavingObject<T>>(reader);
+                var json = reader.ReadToEnd();
+                var settings = new JsonSerializerSettings {ContractResolver = new PrivateSetterContractResolver()};
+                savingObject = JsonConvert.DeserializeObject<SavingObject<T>>(json, settings);
             }
             return savingObject ?? new SavingObject<T>();
         }
@@ -67,10 +64,11 @@ namespace Helpers.Serializers
         private void WriteSavingObjectToFile<T>(SavingObject<T> savingObject)
             where T : DataObject
         {
-            using (var stream = this.GetFileStream(typeof(T)))
-            using (var writer = new JsonTextWriter(new StreamWriter(stream)))
+            using (var writer = new StreamWriter(this.GetFileStream(typeof(T))))
             {
-                this.serializer.Serialize(writer, savingObject);
+                var settings = new JsonSerializerSettings { ContractResolver = new PrivateSetterContractResolver() };
+                var json = JsonConvert.SerializeObject(savingObject, settings);
+                writer.Write(json);
             }
         }
 
