@@ -28,88 +28,74 @@
         </nav>
     </header>
     <main>
-        <div id="content" class="container">
-            <div class="row" id="tabs">
-                <div class="col s12">
-                    <ul class="tabs">
-                        <li class="tab col s6"><a class="active" href="#aktiveausleihen">Aktive Ausleihen</a></li>
-                        <li class="tab col s6"><a href="#vergangeneausleihen">Vergangene Ausleihen</a></li>
-                    </ul>
-                </div>
-                <div id="aktiveausleihen" class="col s12">
-                    <table class="responsive-table">
-                        <thead>
-                            <tr>
-                                <th data-field="aktiveausleihenspiel">Spiel</th>
-                                <th data-field="aktiveausleihenstart">Start Datum</th>
-                                <th data-field="aktiveausleihenend">End Datum</th>
-                                <th data-field="aktiveausleihenkosten">Kosten</th>
-                            </tr>
-                        </thead>
+        <form runat="server">
+            <div id="content" class="container">
+                <div class="row" id="tabs">
+                    <div class="col s12">
+                        <ul class="tabs">
+                            <li class="tab col s6"><a class="active" href="#aktiveausleihen">Aktive Ausleihen</a></li>
+                            <li class="tab col s6"><a href="#vergangeneausleihen">Vergangene Ausleihen</a></li>
+                        </ul>
+                    </div>
+                    <div id="aktiveausleihen" class="col s12">
+                        <table class="responsive-table">
+                            <thead>
+                                <tr>
+                                    <th data-field="aktiveausleihenspiel">Spiel</th>
+                                    <th data-field="aktiveausleihenstart">Start Datum</th>
+                                    <th data-field="aktiveausleihenend">End Datum</th>
+                                    <th data-field="aktiveausleihenkosten">Kosten</th>
+                                </tr>
+                            </thead>
 
-                        <tbody>
-                            <tr>
-                                <td>Alvin</td>
-                                <td>Eclair</td>
-                                <td>Eclair</td>
-                                <td>$0.87</td>
-                            </tr>
-                            <tr>
-                                <td>Alan</td>
-                                <td>Jellybean</td>
-                                <td>Eclair</td>
-                                <td>$3.76</td>
-                            </tr>
-                            <tr>
-                                <td>Jonathan</td>
-                                <td>Eclair</td>
-                                <td>Lollipop</td>
-                                <td>$7.00</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div id="vergangeneausleihen" class="col s12">
-                    <table class="responsive-table">
-                        <thead>
-                            <tr>
-                                <th data-field="vergangeneausleihenspiel">Spiel</th>
-                                <th data-field="vergangeneausleihenstart">Start Datum</th>
-                                <th data-field="vergangeneausleihenend">End Datum</th>
-                                <th data-field="vergangeneausleihenkosten">Kosten</th>
-                            </tr>
-                        </thead>
+                            <tbody>
+                                <% foreach (SpielGut.Klassen.Ausleihe ausleihe in this.Ausleihen)
+                                    {%>
+                                <% if (ausleihe.IsActive)
+                                    { %>
+                                <tr>
+                                    <td><%= ausleihe.Spiel.Name %></td>
+                                    <td><%= ausleihe.StartDatum %></td>
+                                    <td><%= ausleihe.EndDatum %></td>
+                                    <td><%= ausleihe.Kosten %></td>
+                                    <td>
+                                        <asp:Button runat="server" OnClick="Unnamed_Click" Text="X" /></td>
+                                </tr>
+                                <%}
+                                    } %>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="vergangeneausleihen" class="col s12">
+                        <table class="responsive-table">
+                            <thead>
+                                <tr>
+                                    <th data-field="vergangeneausleihenspiel">Spiel</th>
+                                    <th data-field="vergangeneausleihenstart">Start Datum</th>
+                                    <th data-field="vergangeneausleihenend">End Datum</th>
+                                    <th data-field="vergangeneausleihenkosten">Kosten</th>
+                                </tr>
+                            </thead>
 
-                        <tbody>
-                            <tr>
-                                <td>Alvin</td>
-                                <td>Eclair</td>
-                                <td>Eclair</td>
-                                <td>$0.87</td>
-                            </tr>
-                            <tr>
-                                <td>Alvin</td>
-                                <td>Eclair</td>
-                                <td>Eclair</td>
-                                <td>$0.87</td>
-                            </tr>
-                            <tr>
-                                <td>Alan</td>
-                                <td>Jellybean</td>
-                                <td>Eclair</td>
-                                <td>$3.76</td>
-                            </tr>
-                            <tr>
-                                <td>Jonathan</td>
-                                <td>Eclair</td>
-                                <td>Lollipop</td>
-                                <td>$7.00</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                            <tbody>
+                                <% foreach (SpielGut.Klassen.Ausleihe ausleihe in this.Ausleihen)
+                                    {%>
+                                <% if (!ausleihe.IsActive)
+                                    { %>
+                                <tr>
+                                    <td><%= ausleihe.Spiel.Name %></td>
+                                    <td><%= ausleihe.StartDatum %></td>
+                                    <td><%= ausleihe.EndDatum %></td>
+                                    <td><%= ausleihe.Kosten %></td>
+                                </tr>
+                                <%}
+                                    } %>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-        </div>
+        </form>
     </main>
     <footer class="page-footer">
         <div class="container">
