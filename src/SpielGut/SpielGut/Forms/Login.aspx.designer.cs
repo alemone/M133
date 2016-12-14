@@ -7,7 +7,7 @@
 // </automatisch generiert>
 //------------------------------------------------------------------------------
 
-namespace WebAppWebpage {
+namespace SpielGut.Forms {
     
     
     public partial class Login {

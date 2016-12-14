@@ -195,6 +195,7 @@
     <Compile Include="Klassen\Ausleihe.cs" />
     <Compile Include="Klassen\Benutzer.cs" />
     <Compile Include="Klassen\Kategorie.cs" />
+    <Compile Include="Klassen\KategorieEnum.cs" />
     <Compile Include="Klassen\Preisklasse.cs" />
     <Compile Include="Klassen\Spiel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using KDG.DataObjectHandler.BaseTypes;
 
+
 namespace SpielGut.Klassen
 {
     public class Ausleihe : DataObject
@@ -17,6 +18,8 @@ namespace SpielGut.Klassen
         {
             this.Benutzer = benutzer;
             this.Spiel = spiel;
+            this.StartDatum = DateTime.Today;
+            this.EndDatum = DateTime.Today.AddDays(7);
         }
         public Ausleihe()
         {

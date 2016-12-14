@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="MeineAusleihen.aspx.cs" Inherits="WebAppWebpage.MeineAusleihen" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="MeineAusleihen.aspx.cs" Inherits="SpielGut.Forms.MeineAusleihen" %>
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -20,7 +20,7 @@
                     <li><a href="/Forms/MeineAusleihen.aspx">Meine Ausleihen</a></li>
                 </ul>
                 <a href="#!" class="brand-logo center hide-on-small-only">
-                    <img src="/img/favicon.ico" /></a>
+                    <img alt="Icon" src="/img/favicon.ico" /></a>
                 <ul class="right">
                     <li><a href="/Handler/Abmelden.aspx">Abmelden</a></li>
                 </ul>
@@ -33,8 +33,9 @@
                 <div class="row" id="tabs">
                     <div class="col s12">
                         <ul class="tabs">
-                            <li class="tab col s6"><a class="active" href="#aktiveausleihen">Aktive Ausleihen</a></li>
-                            <li class="tab col s6"><a href="#vergangeneausleihen">Vergangene Ausleihen</a></li>
+                            <li class="tab col s4"><a class="active" href="#aktiveausleihen">Aktive Ausleihen</a></li>
+                            <li class="tab col s4"><a href="#vergangeneausleihen">Vergangene Ausleihen</a></li>
+                            <li class="tab col s4"><a href="#spiele">Spiele</a></li>
                         </ul>
                     </div>
                     <div id="aktiveausleihen" class="col s12">
@@ -49,9 +50,9 @@
                             </thead>
 
                             <tbody>
-                                <% foreach (SpielGut.Klassen.Ausleihe ausleihe in this.Ausleihen)
+                                <% foreach (var ausleihe in this.Ausleihen)
                                     {%>
-                                <% if (ausleihe.IsActive)
+                                <% if (ausleihe.IsValid)
                                     { %>
                                 <tr>
                                     <td><%= ausleihe.Spiel.Name %></td>
@@ -59,7 +60,7 @@
                                     <td><%= ausleihe.EndDatum %></td>
                                     <td><%= ausleihe.Kosten %></td>
                                     <td>
-                                        <asp:Button runat="server" class="btn" id="<%= ausleihe.Id %>" OnClick="AusleiheZurueckgeben" Text="X" /></td>
+                                        <asp:Button runat="server" class="waves-effect waves-light btn" OnClick="AusleiheZurueckgeben" Text="X" /></td>
                                 </tr>
                                 <%}
                                     } %>
@@ -78,9 +79,9 @@
                             </thead>
 
                             <tbody>
-                                <% foreach (SpielGut.Klassen.Ausleihe ausleihe in this.Ausleihen)
+                                <% foreach (var ausleihe in this.Ausleihen)
                                     {%>
-                                <% if (!ausleihe.IsActive)
+                                <% if (!ausleihe.IsValid)
                                     { %>
                                 <tr>
                                     <td><%= ausleihe.Spiel.Name %></td>
@@ -90,6 +91,51 @@
                                 </tr>
                                 <%}
                                     } %>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="spiele" class="col s12">
+                        <table class="responsive-table">
+                            <thead>
+                                <tr>
+                                    <th data-field="vergangeneausleihenstart">Name</th>
+                                    <th data-field="vergangeneausleihenend">Hersteller</th>
+                                    <th data-field="vergangeneausleihenkosten">Kategorie</th>
+                                    <th data-field="vergangeneausleihenkosten">Tarif</th>
+                                    <th data-field="spiel">Hinzufügen</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <% foreach (var spiel in this.Spiele)
+                                    { %>
+                                <tr>
+                                    <td><%= spiel.Name %></td>
+                                    <td><%= spiel.Hersteller %></td>
+                                    <td><%= spiel.Kategorie %></td>
+                                    <% if (this.Benutzer.IstMitglied)
+                                        { %>
+                                    <td>CHF <%= spiel.Preisklasse.TarifMitglied %>.-</td>
+                                    <%
+                                        }
+                                        else
+                                        { %>
+                                    <td>CHF <%= spiel.Preisklasse.TarifNichtMitglied %>.-</td>
+                                    <% } %>
+                                    <% if (spiel.IsValid && !spiel.IstAusgeliehen)
+                                        { %>
+                                    <td>
+                                        <asp:Button runat="server" class="btn" OnClick="SpielAuslehnen" Text="+" />
+                                    </td>
+                                    <% }
+                                        else
+                                        { %>
+                                    <td>
+                                        <input type="submit" disabled="disabled" value="+" class="btn" />
+                                    </td>
+                                    <% } %>
+                                </tr>
+                                <%} %>
                             </tbody>
                         </table>
                     </div>

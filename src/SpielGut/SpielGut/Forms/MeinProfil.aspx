@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="MeinProfil.aspx.cs" Inherits="WebAppWebpage.MeinProfil" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="MeinProfil.aspx.cs" Inherits="SpielGut.Forms.MeinProfil" %>
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">

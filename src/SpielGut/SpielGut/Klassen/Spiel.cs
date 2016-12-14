@@ -10,14 +10,14 @@ namespace SpielGut.Klassen
     {
         public string Hersteller { get; set; }
         public string Name { get; set; }
-        public Kategorie Kategorie { get; set; }
+        public KategorieEnum Kategorie { get; set; }
         public Preisklasse Preisklasse { get; set; }
         public bool IstAusgeliehen { get; set; } = false;
-        public Spiel(string hersteler, string name, Kategorie kategorie, Preisklasse preisklasse)
+        public Spiel(string hersteler, string name, KategorieEnum kategorie, Preisklasse preisklasse)
         {
             this.Hersteller = hersteler;
             this.Name = name;
-            this.Kategorie = Kategorie;
+            this.Kategorie = kategorie;
             this.Preisklasse = preisklasse;
         }
         public Spiel()

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Registrieren.aspx.cs" Inherits="WebAppWebpage.Registrieren" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Registrieren.aspx.cs" Inherits="SpielGut.Forms.Registrieren" %>
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">

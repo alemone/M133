@@ -5,19 +5,19 @@ using KDG.DataObjectHandler.Serializers.Json;
 using SpielGut.Klassen;
 using SpielGut.Validierer;
 
-namespace WebAppWebpage
+namespace SpielGut.Forms
 {
     public partial class Registrieren : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (IsPostBack)
+            if (this.IsPostBack)
             {
                 this.HandlePostRequests();
             }
-            else if (IsLoggedIn())
+            else if (this.IsLoggedIn())
             {
-                Response.Redirect("MeinProfil.aspx");
+                this.Response.Redirect("MeinProfil.aspx");
             }
         }
 

@@ -1,7 +1,7 @@
 ﻿using System;
 using SpielGut.Klassen;
 
-namespace WebAppWebpage
+namespace SpielGut.Forms
 {
     public partial class MeinProfil : System.Web.UI.Page
     {
@@ -9,7 +9,7 @@ namespace WebAppWebpage
         {
             if (this.IsLoggedIn())
             {
-                var benutzer = (Benutzer) Session["benutzer"];
+                var benutzer = (Benutzer) this.Session["benutzer"];
                 this.vorname.Value = benutzer.Vorname;
                 this.nachname.Value = benutzer.Nachname;
                 this.email.Value = benutzer.Email;
@@ -20,13 +20,13 @@ namespace WebAppWebpage
             }
             else
             {
-                Response.Redirect("Login.aspx");
+                this.Response.Redirect("Login.aspx");
             }
         }
 
         private bool IsLoggedIn()
         {
-            return !(Session["Benutzer"] == null && Response.Cookies["SpielGut"]["Benutzer"] == null);
+            return !(this.Session["Benutzer"] == null && this.Response.Cookies["SpielGut"]["Benutzer"] == null);
         }
     }
 }

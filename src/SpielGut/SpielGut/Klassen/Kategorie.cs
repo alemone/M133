@@ -5,7 +5,7 @@ using System.Web;
 
 namespace SpielGut.Klassen
 {
-    public enum Kategorie
+    public enum KategorieEnum
     {
         Kindergarten, Unterstufe, Oberstufe
     }

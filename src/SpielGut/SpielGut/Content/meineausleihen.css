@@ -4,3 +4,7 @@
 #tabs div{
     margin: 10px;
 }
+#addbtn {
+    bottom: 220px;
+    right: 4vw;
+}

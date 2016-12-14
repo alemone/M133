@@ -8,7 +8,7 @@ namespace KDG.DataObjectHandler.BaseTypes
 
         public DateTime? ValidTo { get; private set; }
 
-        public bool IsValid => this.ValidTo > DateTime.Now;
+        public bool IsValid => this.ValidTo == null || this.ValidTo > DateTime.Now;
 
         protected DataObject(Guid id)
         {
