@@ -15,7 +15,6 @@ namespace SpielGut.Klassen
         public bool IstMitglied { get; set; }
 
         public Benutzer(string vorname, string nachname, string email, string passwort, string passwortWiderholen, Address address, string telefonnummer, bool istMitglied = false)
-            :base(Guid.NewGuid())
         {
             this.Vorname = vorname;
             this.Nachname = nachname;

@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Web;
 using KDG.DataObjectHandler.BaseTypes;
+using Newtonsoft.Json;
+using JsonSerializer = KDG.DataObjectHandler.Serializers.Json.JsonSerializer;
 
 namespace SpielGut.Klassen
 {
@@ -12,7 +16,9 @@ namespace SpielGut.Klassen
         public string Name { get; set; }
         public KategorieEnum Kategorie { get; set; }
         public Preisklasse Preisklasse { get; set; }
-        public bool IstAusgeliehen { get; set; } = false;
+
+        
+
         public Spiel(string hersteler, string name, KategorieEnum kategorie, Preisklasse preisklasse)
         {
             this.Hersteller = hersteler;
@@ -23,6 +29,17 @@ namespace SpielGut.Klassen
         public Spiel()
         {
         }
-
+        
+        [JsonIgnore]
+        public bool IstAusgeliehen
+        {
+            get
+            {
+                var jsonSerializer = new JsonSerializer(Path.GetTempPath() + "\\SpielGutSicherungen");
+                var ausleihen = jsonSerializer.LoadAllObjects<Ausleihe>().Where(a => a.IsValid).ToList();
+                var spiel = ausleihen.FirstOrDefault(a => a.Spiel.Id == this.Id);
+                return spiel != null;
+            }
+        }
     }
 }

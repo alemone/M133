@@ -10,14 +10,9 @@ namespace KDG.DataObjectHandler.BaseTypes
 
         public bool IsValid => this.ValidTo == null || this.ValidTo > DateTime.Now;
 
-        protected DataObject(Guid id)
-        {
-            this.Id = id;
-        }
-
         protected DataObject()
         {
-            
+            this.Id = Guid.NewGuid();
         }
 
         public void Terminate()
