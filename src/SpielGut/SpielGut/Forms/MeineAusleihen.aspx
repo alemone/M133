@@ -1,5 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="MeineAusleihen.aspx.cs" Inherits="SpielGut.Forms.MeineAusleihen" %>
 
+<%@ Import Namespace="SpielGut.Klassen" %>
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
@@ -29,6 +31,7 @@
     </header>
     <main>
         <form runat="server">
+            <asp:Button runat="server" class="btn" OnC="SpielAuslehnen" CommandArgument="123" Text="+" />
             <div id="content" class="container">
                 <div class="row" id="tabs">
                     <div class="col s12">
@@ -106,8 +109,30 @@
                                 </tr>
                             </thead>
 
-                            <tbody>
-                                <% foreach (var spiel in this.Spiele)
+
+                            <tbody runat="server" id="spieleBody">
+                                <asp:Repeater ID="myRepeater" runat="server">
+                                    <ItemTemplate>
+                                        <tr>
+                                            <td><%# ((Spiel) Container.DataItem).Name %></td>
+                                            <td><%# ((Spiel) Container.DataItem).Hersteller %></td>
+                                            <td><%# ((Spiel) Container.DataItem).Kategorie %></td>
+                                            <% if (this.Benutzer.IstMitglied)
+                                                { %>
+                                            <td>CHF <%# ((Spiel) Container.DataItem).Preisklasse.TarifMitglied %>.-</td>
+                                            <%
+                                                }
+                                                else
+                                                { %>
+                                            <td>CHF <%# ((Spiel) Container.DataItem).Preisklasse.TarifNichtMitglied %>.-</td>
+                                            <% } %>
+                                            <td id="<%# ((Spiel) Container.DataItem).Id %>">
+                                                <asp:Button runat="server" ID="Button" CssClass="btn" Enabled="<%# !((Spiel) Container.DataItem).IstAusgeliehen %>" OnCommand="SpielAuslehnen" CommandArgument="<%# ((Spiel) Container.DataItem).Id  %>" Text="+" />
+                                            </td>
+                                        </tr>
+                                    </ItemTemplate>
+                                </asp:Repeater>
+                                <%--<% foreach (var spiel in this.Spiele)
                                     { %>
                                 <tr>
                                     <td><%= spiel.Name %></td>
@@ -122,20 +147,18 @@
                                         { %>
                                     <td>CHF <%= spiel.Preisklasse.TarifNichtMitglied %>.-</td>
                                     <% } %>
+                                    <td  id="<%= spiel.Id %>">
                                     <% if (spiel.IsValid && !spiel.IstAusgeliehen)
                                         { %>
-                                    <td>
-                                        <asp:Button runat="server" class="btn" OnClick="SpielAuslehnen" Text="+" />
-                                    </td>
+                                        <asp:Button runat="server" ID="<%= spiel.Id %>" class="btn" OnClick="" Text="+" />
                                     <% }
                                         else
                                         { %>
-                                    <td>
                                         <input type="submit" disabled="disabled" value="+" class="btn" />
-                                    </td>
                                     <% } %>
+                                    </td>
                                 </tr>
-                                <%} %>
+                                <%} %>--%>
                             </tbody>
                         </table>
                     </div>

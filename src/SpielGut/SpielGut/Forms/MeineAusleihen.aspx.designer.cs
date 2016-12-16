@@ -11,5 +11,23 @@ namespace SpielGut.Forms {
     
     
     public partial class MeineAusleihen {
+        
+        /// <summary>
+        /// spieleBody-Steuerelement
+        /// </summary>
+        /// <remarks>
+        /// Automatisch generiertes Feld
+        /// Zum Ändern Felddeklaration aus der Designerdatei in eine Code-Behind-Datei verschieben.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl spieleBody;
+        
+        /// <summary>
+        /// myRepeater-Steuerelement
+        /// </summary>
+        /// <remarks>
+        /// Automatisch generiertes Feld
+        /// Zum Ändern Felddeklaration aus der Designerdatei in eine Code-Behind-Datei verschieben.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater myRepeater;
     }
 }
