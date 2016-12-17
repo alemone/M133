@@ -39,9 +39,10 @@ namespace SpielGut.Forms
 
             }
         }
+
         private bool IsLoggedIn()
         {
-            return !(this.Session["Benutzer"] == null && this.Response.Cookies["SpielGut"]["Benutzer"] == null);
+            return this.Session["Benutzer"] != null;
         }
     }
 }

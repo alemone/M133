@@ -17,10 +17,7 @@ namespace SpielGut.Forms
                 var benutzer = benutzerList.Find(o => o.Email == this.email.Value);
                 if (benutzer != null && benutzer.IstBestaetigt && new PasswordHasher().VerifyHashedPassword(benutzer.Passwort, this.passwort.Value) == PasswordVerificationResult.Success)
                 {
-                    this.Session.Add("Benutzer", benutzer);
-
-                    this.Response.Cookies["SpielGut"]["Benutzer"] = benutzer.ToString();
-                    this.Response.Cookies["SpielGut"].Expires = DateTime.Now.AddDays(10.0);
+                    this.Session.Add("Benutzer", benutzer.Id);
                     this.Response.Redirect("MeineAusleihen.aspx");
                 }
             }
@@ -32,7 +29,7 @@ namespace SpielGut.Forms
 
         private bool IsLoggedIn()
         {
-            return !(this.Session["Benutzer"] == null && this.Response.Cookies["SpielGut"]["Benutzer"] == null);
+            return this.Session["Benutzer"] != null;
         }
 
         protected void OnClick(object sender, EventArgs e)

@@ -20,6 +20,8 @@ namespace SpielGut.Forms
         {
             if (this.IsLoggedIn())
             {
+                var uid = Guid.Parse(this.Session["Benutzer"].ToString());
+                this.Benutzer = this.serializer.LoadObject<Benutzer>(uid);
                 this.ReloadBindings();
             }
             else
@@ -30,7 +32,7 @@ namespace SpielGut.Forms
 
         private bool IsLoggedIn()
         {
-            return !(this.Session["Benutzer"] == null && this.Response.Cookies["SpielGut"]["Benutzer"] == null);
+            return this.Session["Benutzer"] != null;
         }
         protected void AusleiheZurueckgeben(object sender, CommandEventArgs e)
         {
@@ -52,7 +54,6 @@ namespace SpielGut.Forms
 
         private void ReloadBindings()
         {
-            this.Benutzer = (Benutzer)this.Session["Benutzer"]; ;
             var ausleiheList = this.serializer.LoadAllObjects<Ausleihe>();
             this.Ausleihen = ausleiheList.Where(o => o.Benutzer.Id == this.Benutzer.Id).ToList();
             this.Spiele = this.serializer.LoadAllObjects<Spiel>();
