@@ -119,6 +119,8 @@
     <Content Include="Content\materialize.css" />
     <Content Include="Content\materialize.min.css" />
     <Content Include="Content\meineausleihen.css" />
+    <Content Include="Forms\PasswortZuruecksetzen.aspx" />
+    <Content Include="Forms\PasswortVergessen.aspx" />
     <Content Include="Forms\MeineAusleihen.aspx" />
     <Content Include="Forms\AccountBestaetigen.aspx" />
     <Content Include="img\SpielgutBanner.jpg" />
@@ -172,6 +174,20 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\PasswortZuruecksetzen.aspx.cs">
+      <DependentUpon>PasswortZuruecksetzen.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forms\PasswortZuruecksetzen.aspx.designer.cs">
+      <DependentUpon>PasswortZuruecksetzen.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\PasswortVergessen.aspx.cs">
+      <DependentUpon>PasswortVergessen.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forms\PasswortVergessen.aspx.designer.cs">
+      <DependentUpon>PasswortVergessen.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Forms\MeineAusleihen.aspx.cs">
       <DependentUpon>MeineAusleihen.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

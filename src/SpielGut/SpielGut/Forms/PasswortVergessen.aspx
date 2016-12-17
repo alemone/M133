@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="SpielGut.Forms.Login" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="PasswortVergessen.aspx.cs" Inherits="SpielGut.Forms.PasswortVergessen" %>
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/Content/login.css" />
     <link rel="stylesheet" href="/Content/main.css" />
     <link rel="icon" type="image/ico" href="/img/favicon.ico" />
-    <title>Login - SpielGut</title>
+    <title>Passwort vergessen - SpielGut</title>
 </head>
 <body>
     <header>
@@ -40,24 +40,9 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="input-field col s12">
-                                <input runat="server" id="passwort" type="password" class="validate" />
-                                <label for="passwort">Passwort</label>
-                            </div>
-                        </div>
-                        <div class="row">
                             <div class="col s12">
-                                <a href="/Forms/PasswortVergessen.aspx">Hilfe! Ich habe mein Passwort vergessen.</a>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col s12 m9">
-                                <a type="button" href="Registrieren.aspx" id="registrierenbtn" class="btn waves-effect waves-light">Registrieren
-                                </a>
-                            </div>
-                            <div class="col s12 m3">
-                                <button runat="server" type="submit" id="loginbtn" class="btn waves-effect waves-light">
-                                    Login
+                                <button runat="server" type="submit" id="passwortbtn" class="btn waves-effect waves-light">
+                                    Passwort Zurücksetzen
                                 </button>
                             </div>
                         </div>

@@ -45,8 +45,7 @@ namespace SpielGut.Forms
 
             if (new UserValidator().IsValid(benutzer))
             {
-                //benutzer.Passwort = new PasswordHasher().HashPassword(benutzer.Passwort);
-                benutzer.Passwort = benutzer.Passwort;
+                benutzer.Passwort = new PasswordHasher().HashPassword(benutzer.Passwort);
                 benutzer.PasswortWiderholen = "";
                 var jsonSerializer = new JsonSerializer(Path.GetTempPath() + "\\SpielGutSicherungen");
                 jsonSerializer.SaveObject(benutzer);
@@ -62,7 +61,7 @@ namespace SpielGut.Forms
                                                        "'>Link</a>.</h2>");
                 var mail = new Mail(from, subject, to, content);
 
-                dynamic response = sendGrid.client.mail.send.post(requestBody: mail.Get());
+                sendGrid.client.mail.send.post(requestBody: mail.Get());
 
             }
         }

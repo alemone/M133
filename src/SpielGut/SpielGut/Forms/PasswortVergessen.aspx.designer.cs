@@ -10,7 +10,7 @@
 namespace SpielGut.Forms {
     
     
-    public partial class Login {
+    public partial class PasswortVergessen {
         
         /// <summary>
         /// email control.
@@ -22,21 +22,12 @@ namespace SpielGut.Forms {
         protected global::System.Web.UI.HtmlControls.HtmlInputText email;
         
         /// <summary>
-        /// passwort control.
+        /// passwortbtn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputPassword passwort;
-        
-        /// <summary>
-        /// loginbtn control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton loginbtn;
+        protected global::System.Web.UI.HtmlControls.HtmlButton passwortbtn;
     }
 }
