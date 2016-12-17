@@ -28,5 +28,10 @@ namespace SpielGut.Forms
         {
             return !(this.Session["Benutzer"] == null && this.Response.Cookies["SpielGut"]["Benutzer"] == null);
         }
+
+        protected void Zuruecksetzen_OnClick(object sender, EventArgs e)
+        {
+            this.Response.Redirect("PasswortZuruecksetzen.aspx?u=" + ((Benutzer)this.Session["benutzer"]).Id);
+        }
     }
 }

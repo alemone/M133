@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.IO;
 using KDG.DataObjectHandler.Serializers.Json;
 using Microsoft.AspNet.Identity;
@@ -8,17 +10,24 @@ namespace SpielGut.Forms
 {
     public partial class PasswortZuruecksetzen : System.Web.UI.Page
     {
+        public ObservableCollection<string> Fehlermeldungen { get; set; } = new ObservableCollection<string>();
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            this.Fehlermeldungen.CollectionChanged += this.AktualisiereFehlermeldungen;
+            this.FehlermeldungsWiederholer.DataSource = this.Fehlermeldungen;
             if (this.IsPostBack)
             {
                 if (this.passwort.Value != this.passwortWiederholen.Value)
+                {
+                    this.Fehlermeldungen.Add("Passwörter nicht gleich!");
                     return;
+                }
                 // TODO Password Validator
                 var uid = this.Request.QueryString["u"];
                 if (uid == null)
                 {
-                    this.Response.Redirect("MeineAusleihen.aspx");
+                    this.Response.Redirect("MeinProfil.aspx");
                 }
                 else
                 {
@@ -26,7 +35,7 @@ namespace SpielGut.Forms
                     var benutzer = jsonSerializer.LoadObject<Benutzer>(Guid.Parse(uid));
                     if (benutzer == null)
                     {
-                        this.Response.Redirect("MeineAusleihen.aspx");
+                        this.Response.Redirect("MeinProfil.aspx");
                     }
                     else
                     {
@@ -36,11 +45,13 @@ namespace SpielGut.Forms
                     }
                 }
             }
-            else if (this.IsLoggedIn())
-            {
-                this.Response.Redirect("MeineAusleihen.aspx");
-            }
         }
+
+        private void AktualisiereFehlermeldungen(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            this.FehlermeldungsWiederholer.DataBind();
+        }
+
 
         private bool IsLoggedIn()
         {

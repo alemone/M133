@@ -56,6 +56,19 @@
                 </div>
             </div>
         </div>
+        <asp:Repeater runat="server" ID="FehlermeldungsWiederholer">
+            <ItemTemplate>
+                <div class="row">
+                    <div class="col s12 m3">
+                        <div class="card-panel teal">
+                            <span class="white-text">
+                                <%# Container.DataItem %>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </ItemTemplate>
+        </asp:Repeater>
     </main>
     <footer class="page-footer">
         <div class="container">

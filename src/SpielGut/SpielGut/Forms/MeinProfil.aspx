@@ -50,6 +50,12 @@
                         </div>
                     </div>
                     <div class="divider"></div>
+                    <div class="row">
+                            <div class="input-field col s12 m8 l6 offset-m2 offset-l3">
+                                <asp:Button runat="server" Text="Passwort Zurücksetzen" OnClick="Zuruecksetzen_OnClick" ID="zuruecksetzenButton" CssClass="btn waves-effect waves-light"/>
+                            </div>
+                        </div>
+                    <div class="divider"></div>
                     <div class="section">
                         <div class="row">
                             <div class="input-field col s12 m6 l4 offset-l2">
