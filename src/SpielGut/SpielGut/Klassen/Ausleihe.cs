@@ -13,7 +13,11 @@ namespace SpielGut.Klassen
         public Spiel Spiel { get; set; }
         public DateTime StartDatum { get; set; }
         public DateTime EndDatum { get; set; }
-        public double Kosten { get; set; }
+
+        public double Kosten => this.Benutzer.IstMitglied
+            ? this.Spiel.Preisklasse.TarifMitglied
+            : this.Spiel.Preisklasse.TarifNichtMitglied;
+
         public Ausleihe(Benutzer benutzer, Spiel spiel)
         {
             this.Benutzer = benutzer;
@@ -27,7 +31,7 @@ namespace SpielGut.Klassen
         }
         public void Verlaengern(int anzWochen)
         {
-
+                this.EndDatum = this.EndDatum.AddDays(anzWochen*7);
         }
     }
 }

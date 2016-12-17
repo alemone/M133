@@ -52,21 +52,6 @@
                     <div class="divider"></div>
                     <div class="section">
                         <div class="row">
-                            <div class="input-field col s12 m8 l6 offset-m2 offset-l3">
-                                <input runat="server" id="passwort" type="password" class="validate" length="64" />
-                                <label for="passwort">Passwort</label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="input-field col s12 m8 l6 offset-m2 offset-l3">
-                                <input runat="server" id="passwortwiderholen" type="password" class="validate" length="64" />
-                                <label for="passwortwiderholen">Passwort wiederholen</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="divider"></div>
-                    <div class="section">
-                        <div class="row">
                             <div class="input-field col s12 m6 l4 offset-l2">
                                 <input runat="server" id="postleitzahl" type="text" class="validate" length="40" />
                                 <label for="postleitzahl">Postleitzahl</label>

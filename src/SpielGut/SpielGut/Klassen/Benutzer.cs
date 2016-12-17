@@ -13,6 +13,7 @@ namespace SpielGut.Klassen
         public Address Address { get; set; }
         public string Telefonnummer { get; set; }
         public bool IstMitglied { get; set; }
+        public bool IstBestaetigt { get; set; }
 
         public Benutzer(string vorname, string nachname, string email, string passwort, string passwortWiderholen, Address address, string telefonnummer, bool istMitglied = false)
         {
@@ -28,7 +29,7 @@ namespace SpielGut.Klassen
 
         public Benutzer()
         {
-            
+
         }
     }
 }

@@ -31,7 +31,6 @@
     </header>
     <main>
         <form runat="server">
-            <asp:Button runat="server" class="btn" OnC="SpielAuslehnen" CommandArgument="123" Text="+" />
             <div id="content" class="container">
                 <div class="row" id="tabs">
                     <div class="col s12">
@@ -53,20 +52,19 @@
                             </thead>
 
                             <tbody>
-                                <% foreach (var ausleihe in this.Ausleihen)
-                                    {%>
-                                <% if (ausleihe.IsValid)
-                                    { %>
-                                <tr>
-                                    <td><%= ausleihe.Spiel.Name %></td>
-                                    <td><%= ausleihe.StartDatum %></td>
-                                    <td><%= ausleihe.EndDatum %></td>
-                                    <td><%= ausleihe.Kosten %></td>
-                                    <td>
-                                        <asp:Button runat="server" class="waves-effect waves-light btn" OnClick="AusleiheZurueckgeben" Text="X" /></td>
-                                </tr>
-                                <%}
-                                    } %>
+                                <asp:Repeater ID="AusleihenWiederholer" runat="server">
+                                    <ItemTemplate>
+                                        <tr>
+                                            <td><%# ((Ausleihe) Container.DataItem).Spiel.Name %></td>
+                                            <td><%# ((Ausleihe) Container.DataItem).StartDatum.ToString("dd.MM.yyyy") %></td>
+                                            <td><%# ((Ausleihe) Container.DataItem).EndDatum.ToString("dd.MM.yyyy") %></td>
+                                            <td>CHF <%# ((Ausleihe) Container.DataItem).Kosten %>.-</td>
+                                            <td id="<%# ((Ausleihe) Container.DataItem).Id %>">
+                                                <asp:Button runat="server" ID="Button" CssClass="btn" OnCommand="AusleiheZurueckgeben" CommandArgument="<%# ((Ausleihe) Container.DataItem).Id  %>" Text="X" />
+                                            </td>
+                                        </tr>
+                                    </ItemTemplate>
+                                </asp:Repeater>
                             </tbody>
                         </table>
                     </div>
@@ -82,18 +80,16 @@
                             </thead>
 
                             <tbody>
-                                <% foreach (var ausleihe in this.Ausleihen)
-                                    {%>
-                                <% if (!ausleihe.IsValid)
-                                    { %>
-                                <tr>
-                                    <td><%= ausleihe.Spiel.Name %></td>
-                                    <td><%= ausleihe.StartDatum %></td>
-                                    <td><%= ausleihe.EndDatum %></td>
-                                    <td><%= ausleihe.Kosten %></td>
-                                </tr>
-                                <%}
-                                    } %>
+                                <asp:Repeater ID="AbgelaufeneAusliehenWiederhohler" runat="server">
+                                    <ItemTemplate>
+                                        <tr>
+                                            <td><%# ((Ausleihe) Container.DataItem).Spiel.Name %></td>
+                                            <td><%# ((Ausleihe) Container.DataItem).StartDatum.ToString("dd.MM.yyyy") %></td>
+                                            <td><%# ((Ausleihe) Container.DataItem).EndDatum.ToString("dd.MM.yyyy") %></td>
+                                            <td>CHF <%# ((Ausleihe) Container.DataItem).Kosten %>.-</td>
+                                        </tr>
+                                    </ItemTemplate>
+                                </asp:Repeater>
                             </tbody>
                         </table>
                     </div>
@@ -111,7 +107,7 @@
 
 
                             <tbody runat="server" id="spieleBody">
-                                <asp:Repeater ID="myRepeater" runat="server">
+                                <asp:Repeater ID="SpieleWiederholer" runat="server">
                                     <ItemTemplate>
                                         <tr>
                                             <td><%# ((Spiel) Container.DataItem).Name %></td>
@@ -132,33 +128,6 @@
                                         </tr>
                                     </ItemTemplate>
                                 </asp:Repeater>
-                                <%--<% foreach (var spiel in this.Spiele)
-                                    { %>
-                                <tr>
-                                    <td><%= spiel.Name %></td>
-                                    <td><%= spiel.Hersteller %></td>
-                                    <td><%= spiel.Kategorie %></td>
-                                    <% if (this.Benutzer.IstMitglied)
-                                        { %>
-                                    <td>CHF <%= spiel.Preisklasse.TarifMitglied %>.-</td>
-                                    <%
-                                        }
-                                        else
-                                        { %>
-                                    <td>CHF <%= spiel.Preisklasse.TarifNichtMitglied %>.-</td>
-                                    <% } %>
-                                    <td  id="<%= spiel.Id %>">
-                                    <% if (spiel.IsValid && !spiel.IstAusgeliehen)
-                                        { %>
-                                        <asp:Button runat="server" ID="<%= spiel.Id %>" class="btn" OnClick="" Text="+" />
-                                    <% }
-                                        else
-                                        { %>
-                                        <input type="submit" disabled="disabled" value="+" class="btn" />
-                                    <% } %>
-                                    </td>
-                                </tr>
-                                <%} %>--%>
                             </tbody>
                         </table>
                     </div>

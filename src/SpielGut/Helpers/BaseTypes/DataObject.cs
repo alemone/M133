@@ -1,4 +1,5 @@
 ﻿using System;
+using Newtonsoft.Json;
 
 namespace KDG.DataObjectHandler.BaseTypes
 {
@@ -8,6 +9,7 @@ namespace KDG.DataObjectHandler.BaseTypes
 
         public DateTime? ValidTo { get; private set; }
 
+        [JsonIgnore]
         public bool IsValid => this.ValidTo == null || this.ValidTo > DateTime.Now;
 
         protected DataObject()

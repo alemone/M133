@@ -42,9 +42,16 @@ namespace KDG.DataObjectHandler.Serializers.Json
             return this.Root + "\\" + this.GetFileName(type);
         }
 
-        private FileStream GetFileStream(Type type)
+        private StreamWriter GetWriterStream(Type type)
         {
-            return new FileStream(this.GetPath(type), FileMode.OpenOrCreate);
+            var fileStream = new FileStream(this.GetPath(type), FileMode.Create);
+            return new StreamWriter(fileStream);
+        }
+
+        private StreamReader GetReaderStream(Type type)
+        {
+            var fileStream = new FileStream(this.GetPath(type), FileMode.OpenOrCreate);
+            return new StreamReader(fileStream);
         }
 
 
@@ -52,7 +59,7 @@ namespace KDG.DataObjectHandler.Serializers.Json
             where T : DataObject
         {
             SavingObject<T> savingObject;
-            using (var reader = new StreamReader(this.GetFileStream(typeof(T))))
+            using (var reader = this.GetReaderStream(typeof(T)))
             {
                 var json = reader.ReadToEnd();
                 var settings = new JsonSerializerSettings {ContractResolver = new PrivateSetterContractResolver()};
@@ -64,7 +71,7 @@ namespace KDG.DataObjectHandler.Serializers.Json
         private void WriteSavingObjectToFile<T>(SavingObject<T> savingObject)
             where T : DataObject
         {
-            using (var writer = new StreamWriter(this.GetFileStream(typeof(T))))
+            using (var writer = this.GetWriterStream(typeof(T)))
             {
                 var settings = new JsonSerializerSettings { ContractResolver = new PrivateSetterContractResolver() };
                 var json = JsonConvert.SerializeObject(savingObject, settings);

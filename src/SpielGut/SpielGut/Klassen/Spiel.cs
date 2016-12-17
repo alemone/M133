@@ -17,19 +17,6 @@ namespace SpielGut.Klassen
         public KategorieEnum Kategorie { get; set; }
         public Preisklasse Preisklasse { get; set; }
 
-        
-
-        public Spiel(string hersteler, string name, KategorieEnum kategorie, Preisklasse preisklasse)
-        {
-            this.Hersteller = hersteler;
-            this.Name = name;
-            this.Kategorie = kategorie;
-            this.Preisklasse = preisklasse;
-        }
-        public Spiel()
-        {
-        }
-        
         [JsonIgnore]
         public bool IstAusgeliehen
         {
@@ -40,6 +27,17 @@ namespace SpielGut.Klassen
                 var spiel = ausleihen.FirstOrDefault(a => a.Spiel.Id == this.Id);
                 return spiel != null;
             }
+        }
+
+        public Spiel(string hersteler, string name, KategorieEnum kategorie, Preisklasse preisklasse)
+        {
+            this.Hersteller = hersteler;
+            this.Name = name;
+            this.Kategorie = kategorie;
+            this.Preisklasse = preisklasse;
+        }
+        public Spiel()
+        {
         }
     }
 }

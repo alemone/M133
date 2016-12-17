@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
-using KDG.DataObjectHandler.Password;
 using KDG.DataObjectHandler.Serializers.Json;
+using Microsoft.AspNet.Identity;
 using SpielGut.Klassen;
 
 namespace SpielGut.Forms
@@ -15,7 +15,7 @@ namespace SpielGut.Forms
                 var jsonSerializer = new JsonSerializer(Path.GetTempPath() + "\\SpielGutSicherungen");
                 var benutzerList = jsonSerializer.LoadAllObjects<Benutzer>();
                 var benutzer = benutzerList.Find(o => o.Email == this.email.Value);
-                if (benutzer != null && PasswordHelper.CompareStringWithHash(this.passwort.Value, benutzer.Passwort))
+                if (benutzer != null && benutzer.IstBestaetigt && new PasswordHasher().VerifyHashedPassword(benutzer.Passwort, this.passwort.Value) == PasswordVerificationResult.Success)
                 {
                     this.Session.Add("Benutzer", benutzer);
 
