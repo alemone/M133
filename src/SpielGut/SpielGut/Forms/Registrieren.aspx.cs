@@ -37,16 +37,14 @@ namespace SpielGut.Forms
                 this.vorname.Value,
                 this.nachname.Value,
                 this.email.Value,
-                this.passwort.Value,
+                new PasswordHasher().HashPassword(this.passwort.Value),
                 this.passwortwiderholen.Value,
                 adresse,
                 this.telefonnummer.Value
                 );
 
-            if (new UserValidator().IsValid(benutzer))
+            if (BenutzerValidator.IsValid(benutzer) && PasswortValidator.IsValid(this.passwort.Value, this.passwortwiderholen.Value))
             {
-                benutzer.Passwort = new PasswordHasher().HashPassword(benutzer.Passwort);
-                benutzer.PasswortWiderholen = "";
                 var jsonSerializer = new JsonSerializer(Path.GetTempPath() + "\\SpielGutSicherungen");
                 jsonSerializer.SaveObject(benutzer);
 

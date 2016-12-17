@@ -9,7 +9,6 @@ namespace SpielGut.Klassen
         public string Nachname { get; set; }
         public string Email { get; set; }
         public string Passwort { get; set; }
-        public string PasswortWiderholen { get; set; }
         public Address Address { get; set; }
         public string Telefonnummer { get; set; }
         public bool IstMitglied { get; set; }
@@ -21,7 +20,6 @@ namespace SpielGut.Klassen
             this.Nachname = nachname;
             this.Email = email;
             this.Passwort = passwort;
-            this.PasswortWiderholen = passwortWiderholen;
             this.Address = address;
             this.Telefonnummer = telefonnummer;
             this.IstMitglied = istMitglied;

@@ -5,6 +5,7 @@ using System.IO;
 using KDG.DataObjectHandler.Serializers.Json;
 using Microsoft.AspNet.Identity;
 using SpielGut.Klassen;
+using SpielGut.Validierer;
 
 namespace SpielGut.Forms
 {
@@ -18,12 +19,11 @@ namespace SpielGut.Forms
             this.FehlermeldungsWiederholer.DataSource = this.Fehlermeldungen;
             if (this.IsPostBack)
             {
-                if (this.passwort.Value != this.passwortWiederholen.Value)
+                if (!PasswortValidator.IsValid(this.passwort.Value, this.passwortWiederholen.Value))
                 {
-                    this.Fehlermeldungen.Add("Passwörter nicht gleich!");
+                    this.Fehlermeldungen.Add("Eingabe Fehlerhaft");
                     return;
                 }
-                // TODO Password Validator
                 var uid = this.Request.QueryString["u"];
                 if (uid == null)
                 {

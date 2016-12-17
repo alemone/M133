@@ -28,7 +28,7 @@ namespace SpielGut.Forms
                 var subject = "Passwort zurücksetzen SpielGut";
                 var to = new Email(this.email.Value);
                 var content = new Content("text/html", "<h1>Passwort Vergessen?</h1>" +
-                                                       "<h2>Sie können Ihr Passwort unter folgendem <a href='http://" + HttpContext.Current.Request.Url.Authority + "/Forms/PasswortZuruecksetzen.aspx?u=" + benutzer.Id + "'>Link</a>.</h2>");
+                                                       "<h2>Sie können Ihr Passwort unter folgendem <a href='http://" + HttpContext.Current.Request.Url.Authority + "/Forms/PasswortZuruecksetzen.aspx?u=" + benutzer.Id + "'>Link</a> zurücksetzen.</h2>");
                 var mail = new Mail(from, subject, to, content);
 
                 sendGrid.client.mail.send.post(requestBody: mail.Get());

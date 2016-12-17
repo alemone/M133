@@ -245,7 +245,8 @@
     <Compile Include="Klassen\Preisklasse.cs" />
     <Compile Include="Klassen\Spiel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Validierer\UserValidator.cs" />
+    <Compile Include="Validierer\PasswortValidator.cs" />
+    <Compile Include="Validierer\BenutzerValidator.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

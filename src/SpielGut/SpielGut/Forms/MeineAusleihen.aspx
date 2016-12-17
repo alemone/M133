@@ -61,7 +61,9 @@
                                             <td>CHF <%# ((Ausleihe) Container.DataItem).Kosten %>.-</td>
                                             <td id="<%# ((Ausleihe) Container.DataItem).Id %>">
                                                 <asp:Button runat="server" ID="Button" CssClass="btn" OnCommand="AusleiheZurueckgeben" CommandArgument="<%# ((Ausleihe) Container.DataItem).Id  %>" Text="X" />
+                                                <asp:Button runat="server" ID="Button1" CssClass="btn" OnCommand="AusleiheVerlaengern" CommandArgument="<%# ((Ausleihe) Container.DataItem).Id  %>" Text=">" />
                                             </td>
+
                                         </tr>
                                     </ItemTemplate>
                                 </asp:Repeater>

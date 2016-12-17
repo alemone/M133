@@ -36,18 +36,26 @@ namespace SpielGut.Forms
         }
         protected void AusleiheZurueckgeben(object sender, CommandEventArgs e)
         {
-            var id = Guid.Parse((string)e.CommandArgument);
+            var id = Guid.Parse(e.CommandArgument.ToString());
             var ausleihe = this.serializer.LoadObject<Ausleihe>(id);
             ausleihe.Terminate();
             this.serializer.SaveObject(ausleihe);
-            this.AusleihenWiederholer.DataBind();
             this.ReloadBindings();
         }
         protected void SpielAuslehnen(object sender, CommandEventArgs e)
         {
-            var id = Guid.Parse((string)e.CommandArgument);
+            var id = Guid.Parse(e.CommandArgument.ToString());
             var spiel = this.serializer.LoadObject<Spiel>(id);
             var ausleihe = new Ausleihe(this.Benutzer, spiel);
+            this.serializer.SaveObject(ausleihe);
+            this.ReloadBindings();
+        }
+
+        protected void AusleiheVerlaengern(object sender, CommandEventArgs e)
+        {
+            var id = Guid.Parse(e.CommandArgument.ToString());
+            var ausleihe = this.serializer.LoadObject<Ausleihe>(id);
+            ausleihe.Verlaengern(1);
             this.serializer.SaveObject(ausleihe);
             this.ReloadBindings();
         }

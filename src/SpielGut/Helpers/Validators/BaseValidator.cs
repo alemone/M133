@@ -4,43 +4,40 @@ using KDG.DataObjectHandler.BaseTypes;
 
 namespace KDG.DataObjectHandler.Validators
 {
-    public abstract class BaseValidator<T>
-        where T : DataObject
+    public static class BaseValidator
     {
-        public abstract bool IsValid(T objectToValid);
-
-        protected bool StringHasValue(string toValidate)
+        public static bool StringHasValue(string toValidate)
         {
             return !string.IsNullOrWhiteSpace(toValidate);
         }
 
-        protected bool StringIsInMaxLenght(string toValidate, int max)
+        public static bool StringIsInMaxLenght(string toValidate, int max)
         {
-            return this.StringIsInRange(toValidate, 0, max);
+            return StringIsInRange(toValidate, 0, max);
         }
 
-        protected bool StringIsInRange(string toValidate, int min, int max)
+        public static bool StringIsInRange(string toValidate, int min, int max)
         {
             return toValidate.Length >= min && toValidate.Length <= max;
         }
 
-        protected bool StringIsEmail(string toValidate)
+        public static bool StringIsEmail(string toValidate)
         {
             string emailRegex = "^(?:(?:[\\w`~!#$%^&*\\-=+;:{}\'|,?\\/]+(?:(?:\\.(?:\"(?:\\\\?[\\w`~!#$%^&*\\-=+;:{}\'|,?\\/\\.()<>\\[\\] @]|\\\\\"|\\\\\\\\)*\"|[\\w`~!#$%^&*\\-=+;:{}\'|,?\\/]+))*\\.[\\w`~!#$%^&*\\-=+;:{}\'|,?\\/]+)?)|(?:\"(?:\\\\?[\\w`~!#$%^&*\\-=+;:{}\'|,?\\/\\.()<>\\[\\] @]|\\\\\"|\\\\\\\\)+\"))@(?:[a-zA-Z\\d\\-]+(?:\\.[a-zA-Z\\d\\-]+)*|\\[\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\])$";
-            return this.StringMatchesRegEx(toValidate, emailRegex);
+            return StringMatchesRegEx(toValidate, emailRegex);
         }
 
-        protected bool StringMatchesRegEx(string toValidate, string regex)
+        public static bool StringMatchesRegEx(string toValidate, string regex)
         {
             return Regex.IsMatch(toValidate, regex);
         }
 
-        protected bool StringsAreEqual(string stringA, string stringB)
+        public static bool StringsAreEqual(string stringA, string stringB)
         {
             return stringA == stringB;
         }
 
-        protected bool StringIsNumeric(string toValidate)
+        public static bool StringIsNumeric(string toValidate)
         {
             return toValidate.All(char.IsDigit);
         }

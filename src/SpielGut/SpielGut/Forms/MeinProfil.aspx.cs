@@ -26,7 +26,7 @@ namespace SpielGut.Forms
                     benutzer.Address.Ort = this.ort.Value;
                     benutzer.Address.Strasse = this.strasse.Value;
                     benutzer.Telefonnummer = this.telefonnummer.Value;
-                    if (new UserValidator().IsValid(benutzer))
+                    if (BenutzerValidator.IsValid(benutzer))
                     {
                         jsonSerializer.SaveObject(benutzer);
                     }
@@ -53,7 +53,7 @@ namespace SpielGut.Forms
 
         protected void Zuruecksetzen_OnClick(object sender, EventArgs e)
         {
-            this.Response.Redirect("PasswortZuruecksetzen.aspx?u=" + ((Benutzer)this.Session["benutzer"]).Id);
+            this.Response.Redirect("PasswortZuruecksetzen.aspx?u=" + this.Session["benutzer"]);
         }
     }
 }
