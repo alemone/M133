@@ -68,7 +68,7 @@
                     <div class="section">
                         <div class="row">
                             <div class="input-field col s12 m6 l4 offset-l2">
-                                <input runat="server" id="postleitzahl" type="text" class="validate" length="40" />
+                                <input runat="server" id="postleitzahl" type="text" class="validate" length="4" />
                                 <label for="postleitzahl">Postleitzahl</label>
                             </div>
                             <div class="input-field col s12 m6 l4">
