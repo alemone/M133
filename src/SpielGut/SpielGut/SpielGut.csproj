@@ -72,8 +72,8 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>Bin\Microsoft.AspNet.Identity.Core.dll</HintPath>
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
@@ -123,6 +123,7 @@
     <Content Include="Forms\PasswortVergessen.aspx" />
     <Content Include="Forms\MeineAusleihen.aspx" />
     <Content Include="Forms\AccountBestaetigen.aspx" />
+    <Content Include="Handler\Initialisierer.aspx" />
     <Content Include="img\SpielgutBanner.jpg" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
@@ -222,6 +223,13 @@
     </Compile>
     <Compile Include="Forms\Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Handler\Initialisierer.aspx.cs">
+      <DependentUpon>Initialisierer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Handler\Initialisierer.aspx.designer.cs">
+      <DependentUpon>Initialisierer.aspx</DependentUpon>
     </Compile>
     <Compile Include="Handler\Abmelden.aspx.cs">
       <DependentUpon>Abmelden.aspx</DependentUpon>

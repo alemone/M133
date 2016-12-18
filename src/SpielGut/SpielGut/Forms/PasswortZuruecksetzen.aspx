@@ -55,8 +55,7 @@
                     </form>
                 </div>
             </div>
-        </div>
-        <asp:Repeater runat="server" ID="FehlermeldungsWiederholer">
+            <asp:Repeater runat="server" ID="FehlermeldungsWiederholer">
             <ItemTemplate>
                 <div class="row">
                     <div class="col s12 m3">
@@ -69,6 +68,7 @@
                 </div>
             </ItemTemplate>
         </asp:Repeater>
+        </div>
     </main>
     <footer class="page-footer">
         <div class="container">

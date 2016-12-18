@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.IO;
+using System.Runtime.InteropServices;
 using KDG.DataObjectHandler.Serializers.Json;
 using Microsoft.AspNet.Identity;
 using SpielGut.Klassen;
@@ -19,9 +20,11 @@ namespace SpielGut.Forms
             this.FehlermeldungsWiederholer.DataSource = this.Fehlermeldungen;
             if (this.IsPostBack)
             {
-                if (!PasswortValidator.IsValid(this.passwort.Value, this.passwortWiederholen.Value))
+                var errormsgs = PasswortValidator.Validate(this.passwort.Value, this.passwortWiederholen.Value);
+                if (errormsgs.Count != 0)
                 {
                     this.Fehlermeldungen.Add("Eingabe Fehlerhaft");
+                    errormsgs.ForEach(f => this.Fehlermeldungen.Add(f));
                     return;
                 }
                 var uid = this.Request.QueryString["u"];

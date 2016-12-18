@@ -15,15 +15,9 @@
     <header>
         <nav>
             <div class="nav-wrapper">
-                <ul class="left">
-                    <li><a href="/Forms/MeinProfil.aspx">Mein Profil</a></li>
-                    <li><a href="/Forms/MeineAusleihen.aspx">Meine Ausleihen</a></li>
-                </ul>
                 <a href="#!" class="brand-logo center hide-on-small-only">
-                    <img src="/img/favicon.ico" /></a>
-                <ul class="right">
-                    <li><a href="/Handler/Abmelden.aspx">Abmelden</a></li>
-                </ul>
+                    <img src="/img/favicon.ico" alt=""/>
+                </a>
             </div>
         </nav>
     </header>
@@ -31,7 +25,7 @@
         <div id="content" class="container">
             <div class="row section valign-wrapper" id="loginMask">
                 <div class="container valign z-depth-4 grey lighten-3 col ">
-                    <img src="/img/SpielgutBanner.jpg" id="logoLogin" />
+                    <img src="/img/SpielgutBanner.jpg" id="logoLogin" alt=""/>
                     <form runat="server">
                         <div class="row">
                             <div class="input-field col s12 ">

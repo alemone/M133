@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.IO;
+using System.Linq;
 using Newtonsoft.Json;
 using SpielGut.Klassen;
 using SpielGut.Validierer;
@@ -9,9 +12,12 @@ namespace SpielGut.Forms
 {
     public partial class MeinProfil : System.Web.UI.Page
     {
+        public ObservableCollection<string> Fehlermeldungen { get; set; } = new ObservableCollection<string>();
+
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            this.Fehlermeldungen.CollectionChanged += this.AktualisiereFehlermeldungen;
+            this.FehlermeldungsWiederholer.DataSource = this.Fehlermeldungen;
             if (this.IsLoggedIn())
             {
                 var uid = Guid.Parse(this.Session["Benutzer"].ToString());
@@ -26,9 +32,14 @@ namespace SpielGut.Forms
                     benutzer.Address.Ort = this.ort.Value;
                     benutzer.Address.Strasse = this.strasse.Value;
                     benutzer.Telefonnummer = this.telefonnummer.Value;
-                    if (BenutzerValidator.IsValid(benutzer))
+                    var errorMsg = (BenutzerValidator.Validate(benutzer));
+                    if (errorMsg.Count == 0)
                     {
                         jsonSerializer.SaveObject(benutzer);
+                    }
+                    else
+                    {
+                        errorMsg.ForEach(f => this.Fehlermeldungen.Add(f));
                     }
                 }
                 this.vorname.Value = benutzer.Vorname;
@@ -44,6 +55,11 @@ namespace SpielGut.Forms
             {
                 this.Response.Redirect("Login.aspx");
             }
+        }
+
+        private void AktualisiereFehlermeldungen(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            this.FehlermeldungsWiederholer.DataBind();
         }
 
         private bool IsLoggedIn()

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.IO;
 using System.Web;
 using KDG.DataObjectHandler.Serializers.Json;
@@ -11,10 +13,10 @@ namespace SpielGut.Forms
 {
     public partial class Registrieren : System.Web.UI.Page
     {
+        public ObservableCollection<string> Fehlermeldungen { get; set; } = new ObservableCollection<string>();
+
         protected void Page_Load(object sender, EventArgs e)
         {
-
-            
             if (this.IsPostBack)
             {
                 this.HandlePostRequests();
@@ -27,6 +29,9 @@ namespace SpielGut.Forms
 
         private void HandlePostRequests()
         {
+            this.Fehlermeldungen.CollectionChanged += this.AktualisiereFehlermeldungen;
+            this.FehlermeldungsWiederholer.DataSource = this.Fehlermeldungen;
+
             var adresse = new Address(
                    this.postleitzahl.Value,
                    this.strasse.Value,
@@ -43,7 +48,11 @@ namespace SpielGut.Forms
                 this.telefonnummer.Value
                 );
 
-            if (BenutzerValidator.IsValid(benutzer) && PasswortValidator.IsValid(this.passwort.Value, this.passwortwiderholen.Value))
+            var errorMsgs = BenutzerValidator.Validate(benutzer);
+            errorMsgs.AddRange(PasswortValidator.Validate(this.passwort.Value, this.passwortwiderholen.Value));
+
+
+            if (errorMsgs.Count == 0)
             {
                 var jsonSerializer = new JsonSerializer(Path.GetTempPath() + "\\SpielGutSicherungen");
                 jsonSerializer.SaveObject(benutzer);
@@ -62,6 +71,15 @@ namespace SpielGut.Forms
                 sendGrid.client.mail.send.post(requestBody: mail.Get());
 
             }
+            else
+            {
+                errorMsgs.ForEach(f => this.Fehlermeldungen.Add(f));
+            }
+        }
+
+        private void AktualisiereFehlermeldungen(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            this.FehlermeldungsWiederholer.DataBind();
         }
 
         private bool IsLoggedIn()

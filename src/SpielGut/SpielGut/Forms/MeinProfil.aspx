@@ -50,12 +50,6 @@
                         </div>
                     </div>
                     <div class="divider"></div>
-                    <div class="row">
-                            <div class="col s12 center">
-                                <asp:Button runat="server" Text="Passwort Zurücksetzen" OnClick="Zuruecksetzen_OnClick" ID="zuruecksetzenButton" CssClass="btn waves-effect waves-light"/>
-                            </div>
-                        </div>
-                    <div class="divider"></div>
                     <div class="section">
                         <div class="row">
                             <div class="input-field col s12 m6 l4 offset-l2">
@@ -80,16 +74,33 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col s12 center">
+                            <div class="col left">
                                 <button runat="server" type="submit" id="registrierenbtn" class="btn waves-effect waves-light">
                                     Änderungen Speichern
                                 </button>
                             </div>
+                            <div class="col right">
+                                <asp:Button runat="server" Text="Passwort Zurücksetzen" OnClick="Zuruecksetzen_OnClick" ID="zuruecksetzenButton" CssClass="btn waves-effect waves-light" />
+                            </div>
                         </div>
                     </div>
+                    <asp:Repeater runat="server" ID="FehlermeldungsWiederholer">
+                        <ItemTemplate>
+                            <div class="row">
+                                <div class="col s12 m3">
+                                    <div class="card-panel teal">
+                                        <span class="white-text">
+                                            <%# Container.DataItem %>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </ItemTemplate>
+                    </asp:Repeater>
                 </form>
             </div>
         </div>
+
     </main>
     <footer class="page-footer">
         <div class="container">

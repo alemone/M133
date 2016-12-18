@@ -7,9 +7,9 @@
 // </automatisch generiert>
 //------------------------------------------------------------------------------
 
-namespace SpielGut.Forms {
+namespace WebAppWebpage {
     
     
-    public partial class AccountBestaetigen {
+    public partial class Initialisierer {
     }
 }

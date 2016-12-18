@@ -15,15 +15,8 @@
     <header>
         <nav>
             <div class="nav-wrapper">
-                <ul class="left">
-                    <li><a href="/Forms/MeinProfil.aspx">Mein Profil</a></li>
-                    <li><a href="/Forms/MeineAusleihen.aspx">Meine Ausleihen</a></li>
-                </ul>
                 <a href="#!" class="brand-logo center hide-on-small-only">
                     <img src="/img/favicon.ico" /></a>
-                <ul class="right">
-                    <li><a href="/Handler/Abmelden.aspx">Abmelden</a></li>
-                </ul>
             </div>
         </nav>
     </header>
@@ -100,6 +93,19 @@
                             </div>
                         </div>
                     </div>
+                    <asp:Repeater runat="server" ID="FehlermeldungsWiederholer">
+                        <ItemTemplate>
+                            <div class="row">
+                                <div class="col s12 m3">
+                                    <div class="card-panel teal">
+                                        <span class="white-text">
+                                            <%# Container.DataItem %>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </ItemTemplate>
+                    </asp:Repeater>
                 </form>
             </div>
         </div>

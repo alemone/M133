@@ -15,15 +15,8 @@
     <header>
         <nav>
             <div class="nav-wrapper">
-                <ul class="left">
-                    <li><a href="/Forms/MeinProfil.aspx">Mein Profil</a></li>
-                    <li><a href="/Forms/MeineAusleihen.aspx">Meine Ausleihen</a></li>
-                </ul>
                 <a href="#!" class="brand-logo center hide-on-small-only">
                     <img src="/img/favicon.ico" /></a>
-                <ul class="right">
-                    <li><a href="/Handler/Abmelden.aspx">Abmelden</a></li>
-                </ul>
             </div>
         </nav>
     </header>
@@ -40,7 +33,12 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col s12">
+                            <div class="col left">
+                                <a href="/Forms/Login.aspx" id="zurueck" class="btn waves-effect waves-light">
+                                    Zum Login
+                                </a>
+                            </div>
+                              <div class="col right">
                                 <button runat="server" type="submit" id="passwortbtn" class="btn waves-effect waves-light">
                                     Passwort Zurücksetzen
                                 </button>
