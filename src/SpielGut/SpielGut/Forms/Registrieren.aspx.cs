@@ -23,7 +23,7 @@ namespace SpielGut.Forms
             }
             else if (this.IsLoggedIn())
             {
-                this.Response.Redirect("MeinProfil.aspx");
+                this.Response.Redirect("MeineAusleihen.aspx");
             }
         }
 
@@ -34,8 +34,8 @@ namespace SpielGut.Forms
 
             var adresse = new Address(
                    this.postleitzahl.Value,
-                   this.strasse.Value,
-                   this.ort.Value
+                   this.ort.Value,
+                   this.strasse.Value
                   );
 
             var benutzer = new Benutzer(
@@ -69,7 +69,7 @@ namespace SpielGut.Forms
                 var mail = new Mail(from, subject, to, content);
 
                 sendGrid.client.mail.send.post(requestBody: mail.Get());
-
+                this.Response.Redirect("MeineAusleihen.aspx");
             }
             else
             {
